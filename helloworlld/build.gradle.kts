@@ -1,5 +1,6 @@
 plugins {
-    kotlin("jvm") version "1.8.0"
+    id("org.jetbrains.kotlin.jvm") // Без версії!
+    application
 }
 
 group = "org.example"
