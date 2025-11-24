@@ -2,6 +2,7 @@ package lab1
 
 fun main() {
     // Виклик функції seed з вашим нікнеймом
+    fun seed(): String = "spokuta"
     seed("spokuta")
 
     // --- Кошеня №1 (приклад) ---
