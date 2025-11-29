@@ -1,8 +1,9 @@
 plugins {
     kotlin("jvm") version Versions.kotlin
     id("org.jetbrains.compose") version Versions.compose
-    application
+    // ПОВЕРНУВ ПЛАГІН (без версії, щоб не було конфлікту, як ми робили раніше):
     id("com.github.gmazzo.buildconfig")
+    application
 }
 
 group = "org.example"
@@ -30,9 +31,10 @@ kotlin {
 
 application {
     mainClass.set("MainKt")
+}
 
-    buildConfig {
-        packageName("me.tetiana.helloworld")  // Це виправить помилку "Unresolved reference: me"
-        buildConfigField("int", "LAB_NUMBER", "2") // Вказуємо номер лабораторної
-    }
+// ЦЕЙ БЛОК МАЄ БУТИ ТУТ (окремо, внизу), а не всередині application:
+buildConfig {
+    packageName("org.example.helloworld")
+    buildConfigField("int", "LAB_NUMBER", "2")
 }
