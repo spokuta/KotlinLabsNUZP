@@ -3,20 +3,20 @@ package com.diacht.ktest.juicefactory
 import com.diacht.ktest.FactoryItf
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
-import com.diacht.ktest.WATER   // ← ADD if not already there
-import com.diacht.ktest.SUGAR   // ← ADD if not already there
+import com.diacht.ktest.WATER
+import com.diacht.ktest.SUGAR
 
 class JuiceFactory : FactoryItf() {
     private val storage = JuiceStorage()
     private val machine = JuicePress(storage)
-    private var cash = 0
 
-    // Add this getter
-    fun getCash(): Int = cash
+    // Public property with private setter
+    var cash = 0
+        private set
 
     override fun loadProducts(productsFromSupplier: List<Product>) {
         productsFromSupplier.forEach { product ->
-            storage.addProduct(product)  // No mapping needed now
+            storage.addProduct(product)
         }
     }
 
