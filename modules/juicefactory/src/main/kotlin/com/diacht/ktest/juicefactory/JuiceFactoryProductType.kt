@@ -1,8 +1,9 @@
 package com.diacht.ktest.juicefactory
 
 import com.diacht.ktest.ProductType
-import com.diacht.ktest.WATER  // Import from library
-import com.diacht.ktest.SUGAR  // Import from library
+// Import library types instead of defining custom ones
+import com.diacht.ktest.WATER
+import com.diacht.ktest.SUGAR
 
 // --- Інгредієнти ---
 object APPLE : ProductType()
@@ -11,8 +12,8 @@ object CARROT : ProductType()
 object TOMATO : ProductType()
 object SALT : ProductType()
 
-// DELETE: object WATER : ProductType()
-// DELETE: object SUGAR : ProductType()
+// REMOVED: object WATER : ProductType()
+// REMOVED: object SUGAR : ProductType()
 
 object NONE : ProductType()
 

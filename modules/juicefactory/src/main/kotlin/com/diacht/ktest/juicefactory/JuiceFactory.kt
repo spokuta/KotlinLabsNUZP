@@ -3,8 +3,8 @@ package com.diacht.ktest.juicefactory
 import com.diacht.ktest.FactoryItf
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
-import com.diacht.ktest.WATER
-import com.diacht.ktest.SUGAR
+import com.diacht.ktest.WATER   // ← ADD if not already there
+import com.diacht.ktest.SUGAR   // ← ADD if not already there
 
 class JuiceFactory : FactoryItf() {
     private val storage = JuiceStorage()

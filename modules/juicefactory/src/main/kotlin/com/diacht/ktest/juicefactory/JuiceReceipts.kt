@@ -3,13 +3,11 @@ package com.diacht.ktest.juicefactory
 import com.diacht.ktest.Receipt
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
+import com.diacht.ktest.WATER   // ← ADD THIS
+import com.diacht.ktest.SUGAR   // ← ADD THIS
 import java.util.concurrent.TimeUnit
 
-// УВАГА: Тут немає жодних import com.diacht...JuiceFactoryProductType
-// Вони не потрібні, бо ми в одному пакеті!
-
 object JuiceReceipts {
-
     val orangeJuice = Receipt(
         products = listOf(
             Product(type = ORANGE, count = 1200),
