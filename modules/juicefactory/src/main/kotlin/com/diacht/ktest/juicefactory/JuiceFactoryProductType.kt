@@ -1,6 +1,8 @@
 package com.diacht.ktest.juicefactory
 
 import com.diacht.ktest.ProductType
+import com.diacht.ktest.WATER  // Import from library
+import com.diacht.ktest.SUGAR  // Import from library
 
 // --- Інгредієнти ---
 object APPLE : ProductType()
@@ -9,9 +11,9 @@ object CARROT : ProductType()
 object TOMATO : ProductType()
 object SALT : ProductType()
 
-// --- Створюємо "свої" воду та цукор, щоб не залежати від помилок імпорту ---
-object WATER : ProductType()
-object SUGAR : ProductType()
+// DELETE: object WATER : ProductType()
+// DELETE: object SUGAR : ProductType()
+
 object NONE : ProductType()
 
 // --- Готові соки ---

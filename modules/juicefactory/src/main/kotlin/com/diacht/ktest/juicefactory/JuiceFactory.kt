@@ -3,39 +3,23 @@ package com.diacht.ktest.juicefactory
 import com.diacht.ktest.FactoryItf
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
-
-// --- УВАГА: Рядок імпорту видалено, бо ми вже в цьому пакеті ---
+import com.diacht.ktest.WATER
+import com.diacht.ktest.SUGAR
 
 class JuiceFactory : FactoryItf() {
     private val storage = JuiceStorage()
     private val machine = JuicePress(storage)
-
-    // Додаємо змінну cash, якої немає в старій версії бібліотеки
     private var cash = 0
+
+    // Add this getter
+    fun getCash(): Int = cash
 
     override fun loadProducts(productsFromSupplier: List<Product>) {
         productsFromSupplier.forEach { product ->
-            // Конвертуємо чужі інгредієнти у свої
-            val myType = mapIngredient(product.type)
-            storage.addProduct(Product(myType, product.count))
+            storage.addProduct(product)  // No mapping needed now
         }
     }
 
-    private fun mapIngredient(incomingType: ProductType): ProductType {
-        val name = incomingType::class.simpleName ?: incomingType.toString()
-        return when (name) {
-            "WATER" -> WATER
-            "SUGAR" -> SUGAR
-            "APPLE" -> APPLE
-            "ORANGE" -> ORANGE
-            "CARROT" -> CARROT
-            "TOMATO" -> TOMATO
-            "SALT" -> SALT
-            else -> incomingType
-        }
-    }
-
-    // Прибрали override, щоб працювало на старій версії лаби
     fun getProductWithBiggestCalorie(): Product {
         val calories = mapOf(
             APPLE_CARROT_JUICE to 150,
@@ -45,14 +29,11 @@ class JuiceFactory : FactoryItf() {
             TOMATO_JUICE to 60
         )
         val maxEntry = calories.maxByOrNull { it.value }
-
-        // Використовуємо наш локальний NONE
         return if (maxEntry != null) Product(maxEntry.key, 1) else Product(NONE, 0)
     }
 
     override fun order(order: List<Pair<ProductType, Int>>): List<Product> {
         val resultList = mutableListOf<Product>()
-
         for ((type, count) in order) {
             val receipt = JuiceReceipts.getReceipt(type)
             if (receipt != null) {
@@ -62,12 +43,9 @@ class JuiceFactory : FactoryItf() {
                             storage.getProduct(ingredient.type, ingredient.count)
                         }
                         resultList.add(Product(type = receipt.outProductType, count = 1))
-
-                        // Додаємо гроші
                         cash += receipt.price.toInt()
-
                     } catch (e: Exception) {
-                        // Не вдалося приготувати
+                        // Failed to make juice
                     }
                 }
             }
