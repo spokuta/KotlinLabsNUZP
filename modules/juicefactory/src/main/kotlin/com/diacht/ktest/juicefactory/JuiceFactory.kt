@@ -61,4 +61,7 @@ class JuiceFactory : FactoryItf() {
         storage.resetSimulation()
         cash = 0
     }
+
+    // Return current cash so tests that call getEarnings() through the FactoryItf see correct value
+    override fun getEarnings(): Int = cash
 }
