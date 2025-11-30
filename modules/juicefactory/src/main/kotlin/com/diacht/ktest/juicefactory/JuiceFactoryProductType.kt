@@ -9,10 +9,10 @@ object CARROT : ProductType()
 object TOMATO : ProductType()
 object SALT : ProductType()
 
-// Додаємо відсутні (щоб не було червоного у Factory та Receipts)
+// --- Створюємо "свої" воду та цукор, щоб не залежати від помилок імпорту ---
 object WATER : ProductType()
 object SUGAR : ProductType()
-object NONE : ProductType() // Додаємо NONE сюди, щоб не шукати в бібліотеці
+object NONE : ProductType()
 
 // --- Готові соки ---
 object ORANGE_JUICE : ProductType()

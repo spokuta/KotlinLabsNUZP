@@ -4,21 +4,39 @@ import com.diacht.ktest.FactoryItf
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
 
-// УВАГА: Ми НЕ імпортуємо JuiceFactoryProductType, бо ми вже в цьому пакеті.
-// Об'єкти APPLE, ORANGE_JUICE, NONE доступні автоматично.
+// --- УВАГА: Рядок імпорту видалено, бо ми вже в цьому пакеті ---
 
 class JuiceFactory : FactoryItf() {
     private val storage = JuiceStorage()
     private val machine = JuicePress(storage)
 
+    // Додаємо змінну cash, якої немає в старій версії бібліотеки
+    private var cash = 0
+
     override fun loadProducts(productsFromSupplier: List<Product>) {
         productsFromSupplier.forEach { product ->
-            storage.addProduct(product)
+            // Конвертуємо чужі інгредієнти у свої
+            val myType = mapIngredient(product.type)
+            storage.addProduct(Product(myType, product.count))
         }
     }
 
+    private fun mapIngredient(incomingType: ProductType): ProductType {
+        val name = incomingType::class.simpleName ?: incomingType.toString()
+        return when (name) {
+            "WATER" -> WATER
+            "SUGAR" -> SUGAR
+            "APPLE" -> APPLE
+            "ORANGE" -> ORANGE
+            "CARROT" -> CARROT
+            "TOMATO" -> TOMATO
+            "SALT" -> SALT
+            else -> incomingType
+        }
+    }
+
+    // Прибрали override, щоб працювало на старій версії лаби
     fun getProductWithBiggestCalorie(): Product {
-        // Карта калорійності
         val calories = mapOf(
             APPLE_CARROT_JUICE to 150,
             APPLE_JUICE to 140,
@@ -26,15 +44,10 @@ class JuiceFactory : FactoryItf() {
             TOMATO_CARROT_JUICE to 80,
             TOMATO_JUICE to 60
         )
-
         val maxEntry = calories.maxByOrNull { it.value }
 
-        return if (maxEntry != null) {
-            Product(maxEntry.key, 1)
-        } else {
-            // Тепер NONE береться з вашого файлу JuiceFactoryProductType
-            Product(NONE, 0)
-        }
+        // Використовуємо наш локальний NONE
+        return if (maxEntry != null) Product(maxEntry.key, 1) else Product(NONE, 0)
     }
 
     override fun order(order: List<Pair<ProductType, Int>>): List<Product> {
@@ -49,8 +62,12 @@ class JuiceFactory : FactoryItf() {
                             storage.getProduct(ingredient.type, ingredient.count)
                         }
                         resultList.add(Product(type = receipt.outProductType, count = 1))
+
+                        // Додаємо гроші
+                        cash += receipt.price.toInt()
+
                     } catch (e: Exception) {
-                        // println("Failed to make $type: ${e.message}")
+                        // Не вдалося приготувати
                     }
                 }
             }
@@ -64,5 +81,6 @@ class JuiceFactory : FactoryItf() {
 
     override fun resetSimulation() {
         storage.resetSimulation()
+        cash = 0
     }
 }
