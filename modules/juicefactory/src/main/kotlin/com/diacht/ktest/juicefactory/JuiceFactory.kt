@@ -10,7 +10,6 @@ class JuiceFactory : FactoryItf() {
     private val storage = JuiceStorage()
     private val machine = JuicePress(storage)
 
-    // Public property with private setter
     var cash = 0
         private set
 
@@ -62,6 +61,5 @@ class JuiceFactory : FactoryItf() {
         cash = 0
     }
 
-    // Return current cash so tests that call getEarnings() through the FactoryItf see correct value
     override fun getEarnings(): Int = cash
 }

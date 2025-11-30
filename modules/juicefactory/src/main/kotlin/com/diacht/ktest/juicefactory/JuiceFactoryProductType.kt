@@ -1,7 +1,6 @@
 package com.diacht.ktest.juicefactory
 
 import com.diacht.ktest.ProductType
-// Import library types instead of defining custom ones
 import com.diacht.ktest.WATER
 import com.diacht.ktest.SUGAR
 
@@ -11,9 +10,6 @@ object ORANGE : ProductType()
 object CARROT : ProductType()
 object TOMATO : ProductType()
 object SALT : ProductType()
-
-// REMOVED: object WATER : ProductType()
-// REMOVED: object SUGAR : ProductType()
 
 object NONE : ProductType()
 

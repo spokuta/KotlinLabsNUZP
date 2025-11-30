@@ -3,8 +3,8 @@ package com.diacht.ktest.juicefactory
 import com.diacht.ktest.Receipt
 import com.diacht.ktest.Product
 import com.diacht.ktest.ProductType
-import com.diacht.ktest.WATER   // ← ADD THIS
-import com.diacht.ktest.SUGAR   // ← ADD THIS
+import com.diacht.ktest.WATER
+import com.diacht.ktest.SUGAR
 import java.util.concurrent.TimeUnit
 
 object JuiceReceipts {

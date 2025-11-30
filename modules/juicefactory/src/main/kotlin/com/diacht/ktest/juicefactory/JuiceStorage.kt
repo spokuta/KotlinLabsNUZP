@@ -5,7 +5,6 @@ import com.diacht.ktest.ProductType
 import com.diacht.ktest.Storage
 
 class JuiceStorage : Storage {
-    // Карта: Тип продукту -> Кількість
     private val inventory = mutableMapOf<ProductType, Int>()
 
     override fun addProduct(product: Product) {
