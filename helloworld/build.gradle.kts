@@ -1,6 +1,7 @@
 plugins {
     kotlin("jvm") version Versions.kotlin
     id("org.jetbrains.compose") version Versions.compose
+    // ПОВЕРНУВ ПЛАГІН:
     id("com.github.gmazzo.buildconfig")
     application
 }
@@ -17,7 +18,6 @@ repositories {
 dependencies {
     implementation(Versions.library)
     implementation(compose.desktop.currentOs)
-    implementation(project(":juicefactory"))
     testImplementation(kotlin("test"))
 }
 
@@ -33,8 +33,8 @@ application {
     mainClass.set("MainKt")
 }
 
-// ЦЕЙ БЛОК МАЄ БУТИ ТУТ (окремо, внизу), а не всередині application:
+
 buildConfig {
     packageName("org.example.helloworld")
-    buildConfigField("int", "LAB_NUMBER", "3")
+    buildConfigField("int", "LAB_NUMBER", "2")
 }
